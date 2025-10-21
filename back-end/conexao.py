@@ -16,7 +16,7 @@ params = {
 
 def coneatar():
     try:
-       conexao = pg.connect(**params)
+       conexao = psycopg2.connect(**params)
        cursor = conexao.cursor()
        print("deu certo!")
        return conexao,cursor
