@@ -53,3 +53,14 @@ def deletar_produto(id_produto):
         return {"mensagem": " Produto deletado com sucesso!"}
     else:
         return {"erro": "Não foi possível deletar o produto"}
+
+@app.get("/buscar")
+def buscar_estoque(id_produto: int):
+    produto = buscar_quantidade(id_produto)
+    if produto:
+        return {
+            "produto": {
+                "nome": produto[0],
+                "quantidade": produto[1]
+            }
+        }
