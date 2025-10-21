@@ -1,7 +1,7 @@
-from conexao import coneatar
+from conexao import conectar
 
 def criar_tabela():
-    conexao,cursor = coneatar()
+    conexao,cursor = conectar()
     if conexao:
         try:
             cursor.execute("""
@@ -11,7 +11,7 @@ def criar_tabela():
             categoria VARCHAR(50),
             preço DECIMAL(10,2),
             quantidade INT
-             )
+            )
             """)
             conexao.commit()
         except Exception as erro:
@@ -19,11 +19,10 @@ def criar_tabela():
         finally:
             cursor.close()
             conexao.close()
-
 criar_tabela()
 
 def inserir_produtos(nome, categoria, preço, quantidade):
-    conexao,cursor = coneatar()
+    conexao,cursor = conectar()
     if conexao:
         try:
             cursor.execute(
@@ -36,24 +35,24 @@ def inserir_produtos(nome, categoria, preço, quantidade):
         finally:
             cursor.close()
             conexao.close()
-
+ 
 
 def listar_produtos():
-    conexao,cursor = coneatar()
+    conexao,cursor = conectar()
     if conexao:
         try:
             cursor.execute(
-                "SELECT * FROM  produtos ORDER BY id"
+                "SELECT * FROM  produto ORDER BY id"
             )
             return cursor.fetchall()
         except Exception as erro:
-            print(f"erro ao tentar listar produtos")
+            print(f"erro ao tentar listar produto")
         finally:
             cursor.closse()
             conexao.closse()
 
 def atualizar_produto(novo_preço, novo_quantidade, id_produtos):
-     conexao, cursor = coneatar()
+     conexao, cursor = conectar()
      if conexao:
         try:
             cursor.execute(
@@ -66,5 +65,19 @@ def atualizar_produto(novo_preço, novo_quantidade, id_produtos):
         finally:
             cursor.close()
             conexao.close()
-atualizar_produto( 1, 25, 16)
+def deletar_produto(id_produtos):
+    conexao, cursor = conectar()
+    if conexao:
+        try:
+            cursor.execute(
+            "DELETE FROM produto WHERE id = %s", (id_produtos,)
+            )
+            conexao.commit()
+        except Exception as erro:
+            print(f"erro ao tentar deletar filme")
+        finally:
+            cursor.close()
+            conexao.close()
+deletar_produto(1)
+
 

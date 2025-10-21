@@ -11,10 +11,10 @@ params = {
     "user": os.getenv("DB_USER"),
     "password": os.getenv("DB_PASSWORD"),
     "host": os.getenv("DB_HOST"),
-    "port": os .getenv("DB_PORT"),
+    "port": os .getenv("DB_PORT")
 }
 
-def coneatar():
+def conectar():
     try:
        conexao = psycopg2.connect(**params)
        cursor = conexao.cursor()
@@ -23,3 +23,4 @@ def coneatar():
     except Exception as erro:
         print(f"erro de conexao {erro}")
         return None,None
+conectar()
